@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "author": "mark <83392589@qq.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.6",
+    "react-chartjs-2": "^5.2.0",
+    "umi": "^4.3.28",
+    "umi-request": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.3"
+  }
+}
