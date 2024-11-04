@@ -1,20 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import * as api from '@/services/api';
+import LineChart from "@/components/LineChart";
 
-const LineChart = ({ chartID }: { chartID: number }) => {
+const LineChartLayout = ({ chartID }: { chartID: number }) => {
     const chartRef = useRef(null);
     const [chartData, setChartData] = useState(null);
-    const options = {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-            },
-        },
-    };
-
     const loadData = async (chartID : number) => {
         try {
             const result = await api.Chart(chartID);
@@ -28,9 +19,9 @@ const LineChart = ({ chartID }: { chartID: number }) => {
     useEffect(() => {
         const loadDataWithTimeout = () => {
             loadData(chartID).then(r => {
-                console.log("Chat Loaded, ChartID=", chartID)
+                console.log("Chart Loaded, ChartID=", chartID)
             });
-            setTimeout(loadDataWithTimeout, 5000);
+            setTimeout(loadDataWithTimeout, 10000);
         };
 
         // Initial load
@@ -43,11 +34,14 @@ const LineChart = ({ chartID }: { chartID: number }) => {
     return (
         <div>
             {chartData ? (
-                <>
+                <div>
                     {/*// @ts-ignore*/}
                     <h3>{chartData.name}<span style={{ fontSize: '0.2em' }}>({new Date().toLocaleTimeString()})</span></h3>
-                    <Line ref={chartRef} data={chartData} options={options} />
-                </>
+                    <div style={{height:"300px"}}>
+                        {/*// @ts-ignore*/}
+                        <LineChart titleText={chartData.name}  legendData={chartData.legends} xAxisData={chartData.labels} seriesData={chartData.datasets} />
+                    </div>
+                </div>
             ) : (
                 <div>Loading...</div>
             )}
@@ -55,4 +49,4 @@ const LineChart = ({ chartID }: { chartID: number }) => {
     );
 };
 
-export default LineChart;
+export default LineChartLayout;

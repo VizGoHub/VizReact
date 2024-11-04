@@ -9,8 +9,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "chart.js": "^4.4.6",
-    "react-chartjs-2": "^5.2.0",
+    "echarts": "^5.5.1",
     "umi": "^4.3.28",
     "umi-request": "^1.4.0"
   },

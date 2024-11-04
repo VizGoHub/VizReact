@@ -9,7 +9,7 @@ export default function Layout() {
           <Link to="/">VizGo</Link>
         </li>
         <li>
-          <Link to="https://github.com/VizGoHub/VizGo/blob/main/README.md">Docs</Link>
+          <a href="https://github.com/VizGoHub/VizGo/blob/main/README.md">Docs</a>
         </li>
         <li>
           <a href="https://github.com/VizGoHub/VizGo">Github</a>
