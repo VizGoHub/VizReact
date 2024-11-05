@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as api from '@/services/api';
 import LineChartLayout from   '@/layouts/LineChartLayout'
+import ChartLayout from "@/layouts/ChartLayout";
 
 export default function HomePage() {
     const [chartsData, setChartsData] = useState(null);
@@ -24,7 +25,7 @@ export default function HomePage() {
             {chartsData ? (
                 // @ts-ignore
                 chartsData.map((chart, index) => (
-                    <LineChartLayout key={index} chartID={chart.chartID} />
+                    <ChartLayout key={index} chartID={chart.chartID} chartType={chart.chartType} />
                 ))
             ) : (
                 <div>Loading...</div>
