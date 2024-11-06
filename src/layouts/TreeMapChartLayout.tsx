@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import 'chart.js/auto';
 import * as api from '@/services/api';
 import TreeMapChart from "@/components/TreeMapChart";
+import LineChart from "@/components/LineChart";
 
 const LineChartLayout = ({ chartID }: { chartID: number }) => {
     const chartRef = useRef(null);
@@ -31,21 +32,17 @@ const LineChartLayout = ({ chartID }: { chartID: number }) => {
         return () => {};
     }, [chartID]);
 
+
     return (
-        <div>
+        <>
             {chartData ? (
-                <div>
-                    {/*// @ts-ignore*/}
-                    <h3>{chartData.name}<span style={{ fontSize: '0.2em' }}>({new Date().toLocaleTimeString()})</span></h3>
-                    <div style={{height:"500px"}}>
-                        {/*// @ts-ignore*/}
-                        <TreeMapChart titleText={chartData.name} seriesData={chartData.datasets} />
-                    </div>
-                </div>
+                /*// @ts-ignore*/
+                <TreeMapChart titleText={chartData.name} seriesData={chartData.datasets} />
+
             ) : (
-                <div>Loading...</div>
+                <>Loading...</>
             )}
-        </div>
+        </>
     );
 };
 

@@ -32,20 +32,15 @@ const BarChartLayout = ({ chartID }: { chartID: number }) => {
     }, [chartID]);
 
     return (
-        <div>
+        <>
             {chartData ? (
-                <div>
-                    {/*// @ts-ignore*/}
-                    <h3>{chartData.name}<span style={{ fontSize: '0.2em' }}>({new Date().toLocaleTimeString()})</span></h3>
-                    <div style={{height:"800px"}}>
-                        {/*// @ts-ignore*/}
-                        <BarChart titleText={chartData.name} yAxisData={chartData.yAxis} seriesData={chartData.datasets} />
-                    </div>
-                </div>
+                /*// @ts-ignore*/
+                <BarChart titleText={chartData.name} yAxisData={chartData.yAxis} seriesData={chartData.datasets} />
+
             ) : (
-                <div>Loading...</div>
+                <>Loading...</>
             )}
-        </div>
+        </>
     );
 };
 

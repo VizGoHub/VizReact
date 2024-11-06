@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as api from '@/services/api';
 import LineChartLayout from   '@/layouts/LineChartLayout'
 import ChartLayout from "@/layouts/ChartLayout";
@@ -25,7 +25,10 @@ export default function HomePage() {
             {chartsData ? (
                 // @ts-ignore
                 chartsData.map((chart, index) => (
-                    <ChartLayout key={index} chartID={chart.chartID} chartType={chart.chartType} />
+                    <div style={{float: 'left'}}>{/*// @ts-ignore*/}
+                    <h3>{chart.chartName}<span style={{fontSize: '0.2em'}}>({new Date().toLocaleTimeString()})</span></h3>
+                    <div style={{height: 450, width: 450, float: 'left'}}><ChartLayout key={index} chartID={chart.chartID} chartType={chart.chartType} /></div>
+                    </div>
                 ))
             ) : (
                 <div>Loading...</div>

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import 'chart.js/auto';
 import * as api from '@/services/api';
 import LineChart from "@/components/LineChart";
+import BarChart from "@/components/BarChart";
 
 const LineChartLayout = ({ chartID }: { chartID: number }) => {
     const chartRef = useRef(null);
@@ -31,21 +32,17 @@ const LineChartLayout = ({ chartID }: { chartID: number }) => {
         return () => {};
     }, [chartID]);
 
+
     return (
-        <div>
+        <>
             {chartData ? (
-                <div>
-                    {/*// @ts-ignore*/}
-                    <h3>{chartData.name}<span style={{ fontSize: '0.2em' }}>({new Date().toLocaleTimeString()})</span></h3>
-                    <div style={{height:"300px"}}>
-                        {/*// @ts-ignore*/}
-                        <LineChart titleText={chartData.name}  legendData={chartData.legends} xAxisData={chartData.labels} seriesData={chartData.datasets} />
-                    </div>
-                </div>
+                /*// @ts-ignore*/
+                <LineChart  titleText={chartData.name}  legendData={chartData.legends} xAxisData={chartData.labels} seriesData={chartData.datasets} />
+
             ) : (
-                <div>Loading...</div>
+                <>Loading...</>
             )}
-        </div>
+        </>
     );
 };
 
