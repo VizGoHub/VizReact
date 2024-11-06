@@ -1,10 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import 'chart.js/auto';
-import * as api from '@/services/api';
-import LineChart from "@/components/LineChart";
 import LineChartLayout from "@/layouts/LineChartLayout";
-import TreeMapChart from "@/components/TreeMapChart";
 import TreeMapChartLayout from "@/layouts/TreeMapChartLayout";
+import BarChartLayout from "@/layouts/BarChartLayout";
 
 const ChartLayout = ({ chartID, chartType}: { chartID: number, chartType: string }) => {
     if(chartType == "line"){
@@ -13,6 +11,10 @@ const ChartLayout = ({ chartID, chartType}: { chartID: number, chartType: string
 
     if(chartType == "treemap"){
         return <TreeMapChartLayout chartID={chartID}  />;
+    }
+
+    if(chartType == "bar"){
+        return <BarChartLayout chartID={chartID}  />;
     }
     return (<></>);
 };

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import 'chart.js/auto';
 import * as api from '@/services/api';
-import TreeMapChart from "@/components/TreeMapChart";
+import BarChart from "@/components/BarChart";
 
-const LineChartLayout = ({ chartID }: { chartID: number }) => {
+const BarChartLayout = ({ chartID }: { chartID: number }) => {
     const chartRef = useRef(null);
     const [chartData, setChartData] = useState(null);
     const loadData = async (chartID : number) => {
@@ -37,9 +37,9 @@ const LineChartLayout = ({ chartID }: { chartID: number }) => {
                 <div>
                     {/*// @ts-ignore*/}
                     <h3>{chartData.name}<span style={{ fontSize: '0.2em' }}>({new Date().toLocaleTimeString()})</span></h3>
-                    <div style={{height:"500px"}}>
+                    <div style={{height:"800px"}}>
                         {/*// @ts-ignore*/}
-                        <TreeMapChart titleText={chartData.name} seriesData={chartData.datasets} />
+                        <BarChart titleText={chartData.name} yAxisData={chartData.yAxis} seriesData={chartData.datasets} />
                     </div>
                 </div>
             ) : (
@@ -49,4 +49,4 @@ const LineChartLayout = ({ chartID }: { chartID: number }) => {
     );
 };
 
-export default LineChartLayout;
+export default BarChartLayout;
