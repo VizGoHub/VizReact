@@ -1,22 +1,42 @@
-import React, { useRef, useEffect, useState } from 'react';
-import 'chart.js/auto';
-import LineChartLayout from "@/layouts/LineChartLayout";
-import TreeMapChartLayout from "@/layouts/TreeMapChartLayout";
-import BarChartLayout from "@/layouts/BarChartLayout";
+import React, {useEffect, useState, useCallback} from 'react';
+import * as api from "@/services/api";
+import {API} from "../../typings";
+import ChartView from "@/components/ChartView";
 
-const ChartLayout = ({ chartID, chartType}: { chartID: number, chartType: string }) => {
-    if(chartType == "line"){
-        return <LineChartLayout chartID={chartID}  />;
-    }
+const ChartLayout = ({ chartID}: { chartID: number }) => {
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [chartData, setChartData] = useState<API.TChartData>({} as API.TChartData);
 
-    if(chartType == "treemap"){
-        return <TreeMapChartLayout chartID={chartID}  />;
-    }
+    const loadData = useCallback(async (chartID: number) => {
+        try {
+            const result = await api.ChartData(chartID);
+            if (result && result.code === 0) {
+                setChartData(result.data)
+                setIsLoaded(true)
+            }
+        } catch (error) {
+            console.error('Error loading chart data:', error);
+        }
+    }, []);
 
-    if(chartType == "bar"){
-        return <BarChartLayout chartID={chartID}  />;
+    useEffect(() => {
+        const loadDataWithTimeout = () => {
+            loadData(chartID).then(r => {
+                console.log("Chart Loaded, ChartID=", chartID)
+            });
+            setTimeout(loadDataWithTimeout, 10000);
+        };
+
+        // Initial load
+        loadDataWithTimeout();
+
+        // Cleanup function to prevent memory leaks
+        return () => {};
+    }, [chartID]);
+
+    if(isLoaded){
+        return <ChartView chartID={chartID} scripts={chartData.chart.chart_code} data={chartData}/>;
     }
-    return (<></>);
 };
 
 export default ChartLayout;

@@ -3,6 +3,8 @@ import { defineConfig } from "umi";
 export default defineConfig({
   routes: [
     { path: "/", component: "index" },
+    { path: "/editor/:id", component: "editor" },
+    { path: "/editor", component: "editor" },
   ],
   npmClient: 'yarn',
   proxy: {
