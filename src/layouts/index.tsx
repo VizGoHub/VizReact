@@ -4,18 +4,21 @@ import styles from './index.less';
 export default function Layout() {
   return (
     <div className={styles.navs}>
-      <ul>
-        <li>
-          <Link to="/">VizGo</Link>
-        </li>
-        <li>
-          <a href="https://github.com/VizGoHub/VizGo/blob/main/README.md">Docs</a>
-        </li>
-        <li>
-          <a href="https://github.com/VizGoHub/VizGo">Github</a>
-        </li>
-      </ul>
-      <Outlet />
+        <ul>
+            <li>
+                <Link to="/">VizGo</Link>
+            </li>
+            <li>
+                <a href="https://github.com/VizGoHub/VizGo/blob/main/README.md">Docs</a>
+            </li>
+            <li>
+                <a href="https://github.com/VizGoHub/VizGo">Github</a>
+            </li>
+            <li>
+                <Link to="/editor">Editor</Link>
+            </li>
+        </ul>
+        <Outlet/>
     </div>
   );
 }
