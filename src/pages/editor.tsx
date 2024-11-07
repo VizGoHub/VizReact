@@ -6,10 +6,11 @@ import * as api from "@/services/api";
 import { API } from "../../typings";
 import { message } from 'antd';
 const { Content, Sider } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 import { useParams } from 'umi';
+
 
 export default function ChartEditorPage() {
     const [chart, setChart] = useState<API.TChart>({} as API.TChart);
@@ -96,12 +97,12 @@ export default function ChartEditorPage() {
 
     return (
         <Layout style={{ height: '100vh' }}>
-            <Sider width="20%" style={{background: '#fff', padding: '20px', overflowY: 'auto'}}>
+            <Sider width="15%" style={{ background: '#fff', padding: '20px', overflowY: 'auto'}}>
                     <Title level={3}>Chart Editor</Title>
                     <Form layout="vertical">
                         <Row>
                             <Col>
-                                <Form.Item label="data.chart.chart_name->string" style={{marginBottom: '8px'}}>
+                                <Form.Item label={<Text copyable>data.chart.chart_name</Text>} style={{marginBottom: '8px'}}>
                                     <Input
                                         name="chart_name"
                                         value={chart.chart_name || ''}
@@ -114,7 +115,20 @@ export default function ChartEditorPage() {
 
                         <Row>
                             <Col>
-                                <Form.Item label="data.chart.chart_type->string" style={{marginBottom: '8px'}}>
+                                <Form.Item label={<Text copyable>data.chart.labels</Text>} style={{marginBottom: '8px'}}>
+                                    <Input
+                                        name="labels"
+                                        value={chart.labels || ''}
+                                        onChange={handleInputChange}
+                                        style={{width: '100%'}}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <Form.Item label="[data.chart.chart_type]" style={{marginBottom: '8px'}}>
                                     <Select
                                         // @ts-ignore
                                         name="chart_type"
@@ -131,22 +145,11 @@ export default function ChartEditorPage() {
                             </Col>
                         </Row>
 
-                        <Row>
-                            <Col>
-                                <Form.Item label="data.chart.labels->string" style={{marginBottom: '8px'}}>
-                                    <Input
-                                        name="labels"
-                                        value={chart.labels || ''}
-                                        onChange={handleInputChange}
-                                        style={{width: '100%'}}
-                                    />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+
 
                         <Row>
                             <Col>
-                                <Form.Item label="data.chart.data_source_id->int" style={{marginBottom: '8px'}}>
+                                <Form.Item label="[DataSource]" style={{marginBottom: '8px'}}>
                                     <InputNumber
                                         name="data_source_id"
                                         value={chart.data_source_id || 0}
@@ -159,7 +162,7 @@ export default function ChartEditorPage() {
 
                         <Row>
                             <Col>
-                                <Form.Item label="data.chart.query_sql->string" style={{marginBottom: '8px'}}>
+                                <Form.Item label="[Query SQL]" style={{marginBottom: '8px'}}>
                                     <TextArea
                                         name="query_sql"
                                         value={chart.query_sql || ''}
@@ -172,7 +175,7 @@ export default function ChartEditorPage() {
 
                         <Row>
                             <Col>
-                                <Form.Item label="data.chart.sort->int" style={{marginBottom: '8px'}}>
+                                <Form.Item label="[Sort]" style={{marginBottom: '8px'}}>
                                     <InputNumber
                                         name="sort"
                                         value={chart.sort || 0}
@@ -213,7 +216,7 @@ export default function ChartEditorPage() {
                 <Title level={4}>TSX Code Editor</Title>
                 <div style={{
                     width: '100%',
-                    height: '600px',
+                    height: '800px',
                     padding: '20px',
                     border: '1px solid #d9d9d9',
                     borderRadius: '8px',
